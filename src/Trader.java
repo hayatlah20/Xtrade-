@@ -10,8 +10,12 @@ public class Trader extends Person {
         this.portfolio = new Portfolio<>();
     }
 
-    public double getBalance() { return balance; }
-    public Portfolio<Asset> getPortfolio() { return portfolio; }
+    public double getBalance() {
+        return balance;
+    }
+    public Portfolio<Asset> getPortfolio() {
+        return portfolio;
+    }
 
     public void debit(double amount) {
         if (amount <= 0 || amount > balance)

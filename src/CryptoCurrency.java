@@ -6,6 +6,8 @@ public class CryptoCurrency extends Asset {
         this.blockchain = blockchain;
     }
 
-    public String getBlockchain() { return blockchain; }
+    public String getBlockchain() {
+        return blockchain;
+    }
 }
 

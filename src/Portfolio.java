@@ -35,5 +35,6 @@ public class Portfolio<T extends Asset> {
     public Map<T, Integer> getAssets() {
         return assets;
     }
+
 }
 

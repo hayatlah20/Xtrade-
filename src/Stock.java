@@ -6,6 +6,8 @@ public class Stock extends Asset {
         this.market = market;
     }
 
-    public String getMarket() { return market; }
+    public String getMarket() {
+        return market;
+    }
 }
 

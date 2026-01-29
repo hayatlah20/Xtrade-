@@ -11,8 +11,14 @@ public abstract class Asset {
         this.unitPrice = unitPrice;
     }
 
-    public String getCode() { return code; }
-    public String getName() { return name; }
-    public double getUnitPrice() { return unitPrice; }
+    public String getCode() {
+        return code;
+    }
+    public String getName() {
+        return name;
+    }
+    public double getUnitPrice() {
+        return unitPrice;
+    }
 }
 
