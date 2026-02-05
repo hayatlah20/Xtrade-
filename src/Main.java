@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -112,7 +113,105 @@ public class Main {
                         break;
 
                     case 7:
-                        market.showTransactions();
+                        boolean subRun = true;
+                        while (subRun) {
+                            System.out.println("\n--- Historique & Analyse ---");
+                            System.out.println("1. Afficher toutes les transactions");
+                            System.out.println("2. Transactions d’un trader");
+                            System.out.println("3. Filtrer par type (BUY/SELL)");
+                            System.out.println("4. Filtrer par actif");
+                            System.out.println("5. Filtrer par intervalle de dates");
+                            System.out.println("6. Trier par date");
+                            System.out.println("7. Trier par montant");
+                            System.out.println("8. Volume total par actif");
+                            System.out.println("9. Montant total BUY/SELL");
+                            System.out.println("10. Top traders (par volume)");
+                            System.out.println("11. Instrument le plus échangé");
+                            System.out.println("0. Retour");
+
+                            System.out.print("Choix : ");
+                            int sub = sc.nextInt();
+                            sc.nextLine();
+
+                            switch (sub) {
+                                case 1:
+                                    market.showTransactions();
+                                    break;
+
+                                case 2:
+                                    System.out.print("ID Trader: ");
+                                    int tid2 = sc.nextInt();
+                                    sc.nextLine();
+                                    market.getTransactionsByTrader(tid2)
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 3:
+                                    System.out.print("Type (BUY/SELL): ");
+                                    String type = sc.nextLine();
+                                    market.getTransactionsByType(type)
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 4:
+                                    System.out.print("Code actif: ");
+                                    String code2 = sc.nextLine();
+                                    market.getTransactionsByAsset(code2)
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 5:
+                                    System.out.print("Date début (YYYY-MM-DDTHH:MM): ");
+                                    LocalDateTime start = LocalDateTime.parse(sc.nextLine());
+
+                                    System.out.print("Date fin (YYYY-MM-DDTHH:MM): ");
+                                    LocalDateTime end = LocalDateTime.parse(sc.nextLine());
+
+                                    market.getTransactionsByDate(start, end)
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 6:
+                                    market.sortTransactionsByDate()
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 7:
+                                    market.sortTransactionsByAmount()
+                                            .forEach(System.out::println);
+                                    break;
+
+                                case 8:
+                                    market.getVolumeByAsset()
+                                            .forEach((k, v) -> System.out.println(k + " | Volume: " + v));
+                                    break;
+
+                                case 9:
+                                    System.out.println("Total BUY: " + market.getTotalBuyAmount());
+                                    System.out.println("Total SELL: " + market.getTotalSellAmount());
+                                    break;
+
+                                case 10:
+                                    System.out.print("Top N traders: ");
+                                    int ne = sc.nextInt();
+                                    sc.nextLine();
+                                    market.getTopTraders(ne)
+                                            .forEach(e -> System.out.println("Trader " + e.getKey() + " | Volume: " + e.getValue()));
+                                    break;
+
+                                case 11:
+                                    market.getMostTradedInstrument()
+                                            .ifPresentOrElse(
+                                                    e -> System.out.println("Instrument le plus échangé: " + e.getKey() + " | Volume: " + e.getValue()),
+                                                    () -> System.out.println("Aucune transaction trouvée")
+                                            );
+                                    break;
+
+                                case 0:
+                                    subRun = false;
+                                    break;
+                            }
+                        }
                         break;
 
                     case 0:
@@ -126,3 +225,5 @@ public class Main {
         sc.close();
     }
 }
+
+
